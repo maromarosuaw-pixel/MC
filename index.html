@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Voxel 3D – sandbox z wodą, lawą, pływaniem i reakcją</title>
+
+<link href="style.css" rel="stylesheet"/></head>
+<body>
+<div id="stage">
+<div id="game">
+<canvas id="gl"></canvas>
+<canvas id="hud"></canvas>
+<div id="overlay">
+<div style="max-width:820px; line-height:1.4; display:flex; flex-direction:column; gap:10px; align-items:center;">
+<h2 style="margin:0 0 6px 0">Voxel 3D – sandbox (auto-scale 16:9)</h2>
+<div>Sterowanie: WASD (A prawo, D lewo), mysz, Spacja skok, Ctrl sprint, LPM niszczenie, PPM stawianie, scroll/1–9 slot, E ekwipunek, B/F5 tryb (Kreatywny/Przetrwanie), T czat. Kreatywny: podwójna Spacja latanie (ON/OFF), Spacja w górę, Shift w dół.</div>
+<div>Środek świata: 0 100 0. Spawn 0 ~ 0. Koordy ujemne OK. Komendy: /tp @p X Y Z, /time set day|night, /gamerule dodaycycle true|false. Doba: 20 min.</div>
+<div class="modeRow">
+<button id="spBtn">Graj (Singleplayer)</button>
+<button id="mpBtn" style="background:#1565c0">Multiplayer</button>
+</div>
+<div class="modeRow" id="mpForm" style="display:none;">
+<input id="nickInput" maxlength="16" placeholder="Twój nick" type="text"/>
+<button id="joinBtn">Dołącz i graj</button>
+</div>
+<div class="subtle" id="mpHint" style="display:none;">Multiplayer: prosty tryb w obrębie tej samej domeny/karty (BroadcastChannel). Otwórz grę w kilku kartach i dołącz różnymi nickami.</div>
+</div>
+</div>
+<!-- Ekwipunek -->
+<div id="inv">
+<div id="invCard">
+<div id="invHeader">
+<h3 id="invTitle">Ekwipunek</h3>
+<button id="invClose">Zamknij (E)</button>
+</div>
+<div id="invHelp"></div>
+<div id="invGrid"></div>
+<div id="survWrap">
+<div style="color:#bbb; font-size:13px; padding:0 2px 6px 2px;">Hotbar</div>
+<div id="hotbarRow"></div>
+<div style="color:#bbb; font-size:13px; padding:8px 2px 6px 2px;">Plecak</div>
+<div id="bagGrid"></div>
+</div>
+</div>
+</div>
+<!-- Czat -->
+<div id="chatLog"></div>
+<div id="chatWrap">
+<input autocomplete="off" id="chatInput" placeholder="Napisz wiadomość lub komendę... (Enter wyślij, Esc anuluj)" spellcheck="false" type="text"/>
+</div>
+<div id="debug"></div>
+</div>
+</div>
+<!-- Podgląd stacka pod kursorem w UI -->
+<div class="cursorStack" id="cursorStack">
+<canvas height="64" id="cursorCanvas" width="64"></canvas>
+<div class="cursorCount" id="cursorCount"></div>
+</div>
+
+<script src="script.js"></script>
+<!-- <script src="fluid_and_physics_water_lava.js"></script> -->
+<script src="generate_biom.js"></script>
+<!-- <script src="biom_zimowy.js"></script>  -->
+<!-- <script src="biom_pustynny.js"></script> -->
+<script src="generate_forest.js"></script>
+<script src="generate_snowy_forest.js"></script>
+<script src="nether.js"></script>
+<script src="rozowa_woda_i_inne_bloki.js"></script>
+<script src="random_and_saves.js"></script>
+<script src="player_posiction.js"></script>
+</body>
+</html>

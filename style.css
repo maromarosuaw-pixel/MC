@@ -1,0 +1,89 @@
+
+  html, body { margin:0; height:100%; background:#000; font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif; overflow:hidden; }
+  #stage { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:#000; }
+  #game {
+    position:relative;
+    width:100vw;
+    height:calc(100vw * 9 / 16);
+    max-height:100vh;
+    max-width:calc(100vh * 16 / 9);
+    aspect-ratio:16 / 9;
+    background:#000;
+  }
+  canvas { display:block; image-rendering: crisp-edges; image-rendering: pixelated; }
+  #gl  { position:absolute; inset:0; }
+  #hud { position:absolute; inset:0; pointer-events:none; }
+
+  #overlay {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    background:radial-gradient(ellipse at center, rgba(0,0,0,.65), rgba(0,0,0,.9));
+    color:#fff; text-align:center; gap:18px; flex-direction:column; font-size:15px;
+    z-index:10;
+  }
+  #overlay button {
+    padding:10px 18px; background:#2b8a3e; border:none; border-radius:6px; color:white; font-weight:700; cursor:pointer;
+  }
+  #overlay .modeRow { display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:center; }
+  #overlay input[type="text"] { padding:10px 12px; border-radius:6px; border:1px solid rgba(255,255,255,0.25); background:rgba(0,0,0,0.35); color:#fff; outline:none; min-width:220px; }
+  #overlay .subtle { color:#bbb; font-size:12px; opacity:0.85; }
+
+  /* Ekwipunek (E) */
+  #inv {
+    position:absolute; inset:0; display:none; align-items:center; justify-content:center;
+    background:rgba(0,0,0,0.55); backdrop-filter:saturate(0.9) blur(2px);
+    color:#fff; z-index:12; pointer-events:auto;
+  }
+  #invCard {
+    width:min(92%, 1000px); max-height:88%;
+    background:rgba(20,20,24,0.95); border:1px solid rgba(255,255,255,0.08); border-radius:10px;
+    box-shadow:0 8px 40px rgba(0,0,0,0.6);
+    display:flex; flex-direction:column; overflow:hidden;
+  }
+  #invHeader { display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:rgba(255,255,255,0.04); }
+  #invHeader h3 { margin:0; font-size:16px; }
+  #invClose { background:#c62828; color:#fff; border:none; border-radius:6px; padding:6px 10px; cursor:pointer; }
+  #invHelp { padding:8px 14px; color:#bbb; font-size:13px; }
+  #invGrid { padding:12px; display:grid; gap:10px; overflow:auto; }
+  .invItem, .slot {
+    border:1px solid rgba(255,255,255,0.09); border-radius:8px; background:#111; color:#ddd;
+    display:flex; flex-direction:column; align-items:center; gap:6px; padding:10px; cursor:pointer;
+    transition:transform .05s ease, background .1s ease;
+    position:relative;
+  }
+  .invItem:hover, .slot:hover { background:#171717; transform:translateY(-2px); }
+  .invLabel { font-size:12px; text-align:center; color:#cfcfcf; }
+
+  #survWrap { padding:12px; display:none; flex-direction:column; gap:10px; overflow:auto; }
+  #hotbarRow { display:grid; grid-template-columns:repeat(9, 1fr); gap:8px; }
+  #bagGrid { display:grid; grid-template-columns:repeat(9, 1fr); gap:8px; }
+  .slotCount {
+    position:absolute; right:6px; bottom:6px; font: 11px monospace; background:rgba(0,0,0,0.5);
+    padding:2px 4px; border-radius:4px;
+  }
+
+  .cursorStack { position:fixed; z-index:1000; pointer-events:none; display:none; align-items:center; justify-content:center; width:64px; height:64px; }
+  .cursorCount { position:absolute; right:0; bottom:0; font: 12px monospace; color:#fff; background:rgba(0,0,0,0.6); padding:2px 4px; border-radius:4px; transform:translate(25%,25%); }
+
+  /* Czat */
+  #chatLog {
+    position:absolute; left:10px; bottom:110px; width:45%; max-width:760px;
+    color:#fff; font: 14px/1.25 system-ui, Segoe UI, Roboto, Arial, sans-serif;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.9);
+    z-index:11; pointer-events:none;
+  }
+  .chatMsg { opacity:0.9; margin:2px 0; }
+  .chatSystem { color:#90caf9; }
+  .chatPlayer { color:#fff; }
+  #chatWrap {
+    position:absolute; left:10px; bottom:70px; width:min(55%, 820px); display:none; z-index:14;
+  }
+  #chatInput {
+    width:100%; padding:10px 12px; border-radius:8px;
+    background:rgba(0,0,0,0.7); border:1px solid rgba(255,255,255,0.25);
+    color:#fff; font:14px system-ui, Segoe UI, Roboto, Arial, sans-serif;
+    outline:none;
+  }
+
+  #debug {
+    position:absolute; left:8px; top:8px; color:#e0e0e0; font-size:12px; background:rgba(0,0,0,.35); padding:6px 8px; border-radius:6px;
+  }
